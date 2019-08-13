@@ -1,0 +1,26 @@
+{
+  "development": {
+    "username": "patrickduvall",
+    "password": null,
+    "database": "sweater-weather_development",
+    "host": "127.0.0.1",
+    "dialect": "postgres",
+    "operatorsAliases": false
+  },
+  "test": {
+    "username": "patrickduvall",
+    "password": null,
+    "database": "sweater-weather_test",
+    "host": "127.0.0.1",
+    "dialect": "postgres",
+    "operatorsAliases": false
+  },
+  "production": {
+    "username": "patrickduvall",
+    "password": null,
+    "database": "sweater-weather_production",
+    "host": "127.0.0.1",
+    "dialect": "postgres",
+    "operatorsAliases": false
+  }
+}
