@@ -26,9 +26,10 @@ describe('api',() => {
     test('returns api key if unique email and passwords match', () => {
       return request(app)
       .post('/api/v1/users')
-      .field('email', 'user@email.com')
-      .field('password', 'password')
-      .field('password_confirmation', 'password').then(response => {
+      .send({email: 'user@email.com',
+      password: 'password',
+      password_confirmation: 'password'}).then(response => {
+        expect(response.statusCode).toBe(201)
         expect(Object.keys(response.body)).toContain('api_key')
       });
     });
