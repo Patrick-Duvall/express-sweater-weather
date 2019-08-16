@@ -48,7 +48,7 @@ describe('api',() => {
   });
 
   describe("Test Account Login", () => {
-    test('returns api key if unique email and passwords match', () => {
+    test('returns api key if email matches pw', () => {
       let api_key = uuidv4()
       let hashedPassword = bcrypt.hashSync("password", 10);
       User.create({
@@ -62,13 +62,34 @@ describe('api',() => {
       password: 'password'})
       .then(response => {
         expect(response.statusCode).toBe(200)
-        console.log(response.body)
         expect(Object.keys(response.body)).toContain('api_key')
       });
     });
+    test('returns 409 if password does not match user', () => {
+      let api_key = uuidv4()
+      let hashedPassword = bcrypt.hashSync("password", 10);
+      User.create({
+        email: "user@email.com",
+        password: hashedPassword,
+        api_key: api_key
+      })
+      return request(app)
+      .post('/api/v1/sessions')
+      .send({email: 'user@email.com',
+      password: 'assword'})
+      .then(response => {
+        expect(response.statusCode).toBe(409)
+      });
+    });
+    test('returns 409 if no user', () => {
+      return request(app)
+      .post('/api/v1/sessions')
+      .send({email: 'user@email.com',
+      password: 'assword'})
+      .then(response => {
+        expect(response.statusCode).toBe(409)
+      });
+    });
   });
-
-
-
 
 });
