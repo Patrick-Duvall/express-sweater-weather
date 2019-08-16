@@ -42,15 +42,6 @@ describe('api',() => {
         expect(response.statusCode).toBe(409)
       });
     });
-    // test('returns 409 if email in use', () => {
-    //   return request(app)
-    //   .post('/api/v1/users')
-    //   .send({email: 'user@email.com',
-    //   password: 'password',
-    //   password_confirmation: 'passwordbad'}).then(response => {
-    //     expect(response.statusCode).toBe(409)
-    //   });
-    // });
   });
 
 
