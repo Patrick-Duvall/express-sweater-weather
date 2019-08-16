@@ -9,9 +9,7 @@ const saltRounds = 10;
 router.post("/", function (req, res) {
   let api_key = uuidv4()
   let hashedPassword = bcrypt.hashSync(req.body.password, 10);
-  if (req.body.password === req.body.password_confirmation) {
-
-
+  if (req.body.password === req.body.password_confirmation ) {
   User.create({
     email: req.body.email,
     password: hashedPassword,

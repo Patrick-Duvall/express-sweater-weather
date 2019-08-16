@@ -33,6 +33,24 @@ describe('api',() => {
         expect(Object.keys(response.body)).toContain('api_key')
       });
     });
+    test('returns 409 if passwords dont match', () => {
+      return request(app)
+      .post('/api/v1/users')
+      .send({email: 'user@email.com',
+      password: 'password',
+      password_confirmation: 'passwordbad'}).then(response => {
+        expect(response.statusCode).toBe(409)
+      });
+    });
+    // test('returns 409 if email in use', () => {
+    //   return request(app)
+    //   .post('/api/v1/users')
+    //   .send({email: 'user@email.com',
+    //   password: 'password',
+    //   password_confirmation: 'passwordbad'}).then(response => {
+    //     expect(response.statusCode).toBe(409)
+    //   });
+    // });
   });
 
 
