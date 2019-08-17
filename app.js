@@ -19,6 +19,6 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use('/', indexRouter);
 app.use('/api/v1/users', usersRouter);
 app.use('/api/v1/sessions', sessionsRouter);
-app.use('/api/v1/sessions', forecastRouter);
+app.use('/api/v1/forecast', forecastRouter);
 
 module.exports = app;
