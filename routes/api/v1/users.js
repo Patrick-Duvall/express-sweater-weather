@@ -3,7 +3,6 @@ var router = express.Router();
 var User = require('../../../models').User;
 const uuidv4 = require('uuid/v4')
 const bcrypt = require('bcrypt');
-const saltRounds = 10;
 
 /*POST new user*/
 router.post("/", function (req, res) {
