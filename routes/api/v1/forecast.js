@@ -17,10 +17,16 @@ router.get("/", function (req, res) {
     let lng  = latLng.results[0].geometry.location.lng
     console.log(lat)
     console.log(lng)
-    
-    // fetch(`https://api.darksky.net/forecast/${process.env.DARKSKY_KEY}/${lat},${lng}`)
-    res.setHeader("Content-Type", "application/json");
-    res.status(200).send(JSON.stringify(latLng));
+
+    fetch(`https://api.darksky.net/forecast/${process.env.DARKSKY_KEY}/${lat},${lng}`)
+    .then(response => {
+      return response.json()})
+      .then(forecast => {
+      res.setHeader("Content-Type", "application/json");
+      res.status(200).send(JSON.stringify(forecast));
+    })
+  //   res.setHeader("Content-Type", "application/json");
+  //   res.status(200).send(JSON.stringify(latLng));
   })
     .catch(error => {
       res.setHeader("Content-Type", "application/json");

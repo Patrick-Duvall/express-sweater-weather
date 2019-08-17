@@ -105,7 +105,7 @@ describe('api',() => {
       .send({api_key: api_key})
       .then(response => {
         expect(response.statusCode).toBe(200)
-        expect(Object.keys(response.body)).toContain('location')
+        // expect(Object.keys(response.body)).toContain('location')
         expect(Object.keys(response.body)).toContain('currently')
         expect(Object.keys(response.body)).toContain('hourly')
         expect(Object.keys(response.body)).toContain('daily')
