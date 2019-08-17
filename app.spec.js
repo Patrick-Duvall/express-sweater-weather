@@ -111,6 +111,18 @@ describe('api',() => {
         expect(Object.keys(response.body)).toContain('daily')
       });
     });
+    test('returns 409 if no apikey', () => {
+      return request(app)
+      .get('/api/v1/forecast?location=denver,co')
+      .then(response => {
+        expect(response.statusCode).toBe(409)
+      });
+    });
   });
 
 });
+
+//window.fetch = jest.fn().mockImplementation() => Promise.resolve({
+// json: () Promise.resolve(data)
+// }))
+// })
