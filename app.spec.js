@@ -118,6 +118,20 @@ describe('api',() => {
         expect(response.statusCode).toBe(409)
       });
     });
+    test('returns 409 if bad apikey', () => {
+      let api_key = uuidv4()
+      let hashedPassword = bcrypt.hashSync("password", 10);
+      User.create({
+        email: "user@email.com",
+        password: hashedPassword,
+        api_key: 'abc123'
+      })
+      return request(app)
+      .get('/api/v1/forecast?location=denver,co')
+      .then(response => {
+        expect(response.statusCode).toBe(409)
+      });
+    });
   });
 
 });

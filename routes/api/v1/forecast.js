@@ -8,6 +8,15 @@ const fetch = require('node-fetch')
 
 router.get("/", function (req, res) {
   if(req.body.api_key){
+    user =  User.findOne({
+        where: {
+          email: req.body.email
+        }
+      })
+      .then(user => {
+        if (!user){
+          res.status(409).send()
+        } else {
   let location = req.query.location
   fetch(`https://maps.googleapis.com/maps/api/geocode/json?address=${location}&key=${process.env.GOOGLE_KEY}`)
   .then(response => {
@@ -27,6 +36,8 @@ router.get("/", function (req, res) {
       res.setHeader("Content-Type", "application/json");
       res.status(500).send({ error })
     });
+  }
+})
   } else{
   res.status(409).send()}
 });
