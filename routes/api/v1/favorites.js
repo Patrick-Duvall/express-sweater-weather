@@ -25,13 +25,12 @@ router.post("/", function (req, res){
           state: state}
         })
         .then( city => {
-          console.log(city[0].dataValues.id);
-          UserCity.create({
+          UserCity.findOrCreate({
+            where:{
             cityId: city[0].dataValues.id,
-            userId: user.id
+            userId: user.id}
         })
         .then( usercity =>{
-          console.log(usercity)
         res.setHeader("Content-Type", "application/json");
         res.status(200).send(JSON.stringify({message: `${req.body.location} has been added to your favorites`}));
       });
