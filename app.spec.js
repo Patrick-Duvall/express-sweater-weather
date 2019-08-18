@@ -11,7 +11,6 @@ describe('api',() => {
   });
   beforeEach(() => {
     shell.exec('npx sequelize db:migrate')
-    shell.exec('npx sequelize db:seed:all')
   });
   afterEach(() => {
     shell.exec('npx sequelize db:migrate:undo:all')
@@ -135,10 +134,10 @@ describe('api',() => {
   });
 
   describe("User can favorite a city ", () => {
-    test('should return a message',() => {
+    test('should return a message',async () => {
       let api_key = uuidv4()
       let hashedPassword = bcrypt.hashSync("password", 10);
-      User.create({
+      await User.create({
         email: "user@email.com",
         password: hashedPassword,
         api_key: api_key
@@ -150,11 +149,21 @@ describe('api',() => {
         expect(Object.keys(response.body)).toContain('message')
       });
     });
+    test('works on other cities',async () => {
+      let api_key = uuidv4()
+      let hashedPassword = bcrypt.hashSync("password", 10);
+      await User.create({
+        email: "user@email.com",
+        password: hashedPassword,
+        api_key: api_key
+      })
+      return request(app).post('/api/v1/favorites')
+      .send({api_key: api_key, location: "Yuma, AZ"})
+      .then(response => {
+        expect(response.statusCode).toBe(200)
+        expect(Object.keys(response.body.message)).toBe("Yuma, AZ has been added to your favorites")
+      });
+    });
   });
 
 });
-
-//window.fetch = jest.fn().mockImplementation() => Promise.resolve({
-// json: () Promise.resolve(data)
-// }))
-// })

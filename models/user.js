@@ -6,6 +6,12 @@ module.exports = (sequelize, DataTypes) => {
     api_key: DataTypes.STRING
   }, {});
   User.associate = function(models) {
+    User.belongsToMany(models.City, {
+    through: 'UserCities',
+    as: 'cities',
+    foreignKey: 'userId',
+    otherKey: 'cityId'
+  });
   };
   return User;
 };
