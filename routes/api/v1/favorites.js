@@ -16,7 +16,6 @@ router.post("/", function (req, res){
     })
     .then(user => {
       if (!user){
-        console.log(user)
         res.status(409).send()
       } else {
         let city = req.body.location.split(", ")[0]
@@ -26,23 +25,23 @@ router.post("/", function (req, res){
           state: state}
         })
         .then( city => {
-          console.log(city)
-          // UserCity.create({
-          //   cityId: city.id,
-          //   userId: user.id
-          // });
-        // });
-        // .then( usercity =>{
-          // console.log(usercity)
+          console.log(city[0].dataValues.id);
+          UserCity.create({
+            cityId: city[0].dataValues.id,
+            userId: user.id
+        })
+        .then( usercity =>{
+          console.log(usercity)
         res.setHeader("Content-Type", "application/json");
         res.status(200).send(JSON.stringify({message: `${req.body.location} has been added to your favorites`}));
       });
+      });
     }
-  });
-    // .catch(error => {
-    //   res.setHeader("Content-Type", "application/json");
-    //   res.status(500).send({ error });
-    // });
+  })
+    .catch(error => {
+      res.setHeader("Content-Type", "application/json");
+      res.status(500).send({ error });
+    });
 });
 
 module.exports = router

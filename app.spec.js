@@ -161,7 +161,7 @@ describe('api',() => {
       .send({api_key: api_key, location: "Yuma, AZ"})
       .then(response => {
         expect(response.statusCode).toBe(200)
-        expect(Object.keys(response.body.message)).toBe("Yuma, AZ has been added to your favorites")
+        expect(Object.values(response.body.message)).toStrictEqual(["Y", "u", "m", "a", ",", " ", "A", "Z", " ", "h", "a", "s", " ", "b", "e", "e", "n", " ", "a", "d", "d", "e", "d", " ", "t", "o", " ", "y", "o", "u", "r", " ", "f", "a", "v", "o", "r", "i", "t", "e", "s"])
       });
     });
   });
