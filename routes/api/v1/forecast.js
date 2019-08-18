@@ -10,7 +10,7 @@ router.get("/", function (req, res) {
   if(req.body.api_key){
     user =  User.findOne({
         where: {
-          email: req.body.email
+          api_key: req.body.api_key
         }
       })
       .then(user => {
