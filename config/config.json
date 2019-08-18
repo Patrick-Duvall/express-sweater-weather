@@ -10,17 +10,12 @@
   "test": {
     "username": "patrickduvall",
     "password": null,
-    "database": "sweater-weather-exp_test2",
+    "database": "sweater-weather-exp_test3",
     "host": "127.0.0.1",
     "dialect": "postgres",
     "operatorsAliases": false
   },
   "production": {
-    "username": "patrickduvall",
-    "password": null,
-    "database": "sweater-weather-exp_production",
-    "host": "127.0.0.1",
-    "dialect": "postgres",
-    "operatorsAliases": false
+    "use_env_variable": "DATABASE_URL"
   }
 }

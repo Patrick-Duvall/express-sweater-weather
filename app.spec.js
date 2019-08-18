@@ -92,10 +92,10 @@ describe('api',() => {
   });
 
   describe("Test Forecast for a city ", () => {
-    test('should return forcast',() => {
+    test('should return forcast',async () => {
       let api_key = uuidv4()
       let hashedPassword = bcrypt.hashSync("password", 10);
-      User.create({
+      await User.create({
         email: "user@email.com",
         password: hashedPassword,
         api_key: api_key
