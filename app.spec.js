@@ -134,6 +134,24 @@ describe('api',() => {
     });
   });
 
+  describe("User can favorite a city ", () => {
+    test('should return a message',() => {
+      let api_key = uuidv4()
+      let hashedPassword = bcrypt.hashSync("password", 10);
+      User.create({
+        email: "user@email.com",
+        password: hashedPassword,
+        api_key: api_key
+      })
+      return request(app).post('/api/v1/favorites')
+      .send({api_key: api_key, location: "Denver, CO"})
+      .then(response => {
+        expect(response.statusCode).toBe(200)
+        expect(Object.keys(response.body)).toContain('message')
+      });
+    });
+  });
+
 });
 
 //window.fetch = jest.fn().mockImplementation() => Promise.resolve({
