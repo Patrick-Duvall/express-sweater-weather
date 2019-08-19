@@ -10,8 +10,7 @@ This project is a reimplementation of the project [Sweater Weather](https://gith
 
 ### DB Schema
 
-
-
+![image](https://user-images.githubusercontent.com/35322570/63269397-5c697500-c253-11e9-884d-c404417042c6.png)
 ### Initial Setup
 
 To install on your local machine
